@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const { Student } = require('../db')
+const { Student } = require('../db/models')
 
 router.get('/', (req, res, next) => {
   Student.findAll()
@@ -48,4 +48,4 @@ router.delete('/:studentId', (req, res, next) => {
 })
 
 
-export default router;
+module.exports = router;

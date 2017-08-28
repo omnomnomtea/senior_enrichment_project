@@ -12,4 +12,4 @@ const Student = require('./student')
 Student.belongsTo(Campus);
 Campus.hasMany(Student);
 
-module.exports = {User, Campus}
+module.exports = {User, Campus, Student}

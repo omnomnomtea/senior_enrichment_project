@@ -1,9 +1,9 @@
 const campusRouter = require('./campus');
-const studentRouter = require('./student')
+const studentRouter = require('./student');
 
-const api = require('express').Router()
+const api = require('express').Router();
 
-api.use('./campus', campusRouter);
-api.use('./student', studentRouter);
+api.use('/campuses', campusRouter);
+api.use('/students', studentRouter);
 
-export default api;
+module.exports = api;
