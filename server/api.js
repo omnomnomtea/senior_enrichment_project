@@ -1,3 +1,5 @@
+//DOES NOTHING, NEVER USED, JUST KEEPING IT AROUND FOR REFERENCE FOR NOW
+
 'use strict'
 const api = require('express').Router()
 const db = require('../db')
