@@ -64,6 +64,7 @@ const reducer = (state = [], action) => {
 export const createStudent = (student) => {
   return (dispatch) => {
     axios.post('/api/students/', student)
+      .then(res => res.data)
       .then(returnedstudent => {
         dispatch(studentAdded(returnedstudent));
       })
@@ -84,6 +85,7 @@ export const deleteStudent = (student) => {
 export const modifyStudent = (student) => {
   return (dispatch) => {
     axios.put('/api/students/', student)
+      .then(res => res.data)
       .then(returnedStudent => {
         dispatch(studentModified(returnedStudent));
       })

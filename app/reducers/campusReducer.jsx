@@ -75,6 +75,8 @@ const reducer = (state = [], action) => {
 export const createCampus = (campus) => {
   return (dispatch) => {
     axios.post('/api/campuses/', campus)
+      .then(res => res.data)
+
       .then(returnedCampus => {
         dispatch(campusAdded(returnedCampus));
       })
@@ -95,6 +97,7 @@ export const deleteCampus = (campus) => {
 export const modifyCampus = (campus) => {
   return (dispatch) => {
     axios.put('/api/campuses/', campus)
+      .then(res => res.data)
       .then(campus => {
         dispatch(campusModifed(campus));
       })
@@ -105,7 +108,7 @@ export const modifyCampus = (campus) => {
 export const loadCampuses = () => {
   return (dispatch) => {
     axios.get('/api/campuses/')
-    .then(res => res.data)
+      .then(res => res.data)
       .then(campuses => {
         dispatch(campusesLoaded(campuses));
       })

@@ -64,6 +64,7 @@ const reducer = (state = [], action) => {
 export const createUser = (user) => {
   return (dispatch) => {
     axios.post('/api/users/', user)
+      .then(res => res.data)
       .then(returnedUser => {
         dispatch(userAdded(returnedUser));
       })
@@ -84,6 +85,7 @@ export const deleteUser = (user) => {
 export const modifyUser = (user) => {
   return (dispatch) => {
     axios.put('/api/users/', user)
+      .then(res => res.data)
       .then(returnedUser => {
         dispatch(userModified(returnedUser));
       })
