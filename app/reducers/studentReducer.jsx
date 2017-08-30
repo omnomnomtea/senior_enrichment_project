@@ -84,8 +84,8 @@ export const deleteStudent = (student) => {
 export const modifyStudent = (student) => {
   return (dispatch) => {
     axios.put('/api/students/', student)
-      .then(student => {
-        dispatch(studentModified(student));
+      .then(returnedStudent => {
+        dispatch(studentModified(returnedStudent));
       })
       .catch(console.log.bind(console))
   }

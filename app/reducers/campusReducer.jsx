@@ -7,6 +7,7 @@ import axios from 'axios';
 const CAMPUS_ADDED = 'CAMPUS_ADDED';
 const CAMPUS_DELETED = 'CAMPUS_DELETED';
 const CAMPUS_MODIFIED = 'CAMPUS_MODIFIED';
+const CAMPUSES_LOADED = 'CAMPUSES_LOADED';
 
 
 //-------------------------------------
@@ -34,6 +35,13 @@ export const campusModifed = (campus) => {
   }
 }
 
+export const campusesLoaded = (campuses) => {
+  return {
+    type: CAMPUSES_LOADED,
+    campuses: campuses
+  }
+}
+
 //-------------------------------------
 //REDUCER
 //-------------------------------------
@@ -53,6 +61,9 @@ const reducer = (state = [], action) => {
       newState = state.slice(0, oldIndex);
       newState = newState.concat(state.slice(oldIndex + 1));
       return newState;
+    case CAMPUSES_LOADED:
+      newState = action.campuses;
+      return newState;
     default:
       return state;
   }
@@ -64,28 +75,39 @@ const reducer = (state = [], action) => {
 export const createCampus = (campus) => {
   return (dispatch) => {
     axios.post('/api/campuses/', campus)
-      .then(returnedcampus => {
-        dispatch(campusAdded(returnedcampus));
+      .then(returnedCampus => {
+        dispatch(campusAdded(returnedCampus));
       })
       .catch(console.log.bind(console))
   }
 }
 
-export const deleteCampus = (student) => {
+export const deleteCampus = (campus) => {
   return (dispatch) => {
-    axios.delete(`/api/students/${student.id}`)
+    axios.delete(`/api/campuss/${campus.id}`)
       .then(() => {
-        dispatch(campusDeleted(student));
+        dispatch(campusDeleted(campus));
       })
       .catch(console.log.bind(console))
   }
 }
 
-export const modifyCampus = (student) => {
+export const modifyCampus = (campus) => {
   return (dispatch) => {
-    axios.put('/api/students/', student)
-      .then(student => {
-        dispatch(campusModifed(student));
+    axios.put('/api/campuses/', campus)
+      .then(campus => {
+        dispatch(campusModifed(campus));
+      })
+      .catch(console.log.bind(console))
+  }
+}
+
+export const loadCampuses = () => {
+  return (dispatch) => {
+    axios.get('/api/campuses/')
+    .then(res => res.data)
+      .then(campuses => {
+        dispatch(campusesLoaded(campuses));
       })
       .catch(console.log.bind(console))
   }

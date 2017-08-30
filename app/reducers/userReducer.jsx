@@ -84,8 +84,8 @@ export const deleteUser = (user) => {
 export const modifyUser = (user) => {
   return (dispatch) => {
     axios.put('/api/users/', user)
-      .then(user => {
-        dispatch(userModified(user));
+      .then(returnedUser => {
+        dispatch(userModified(returnedUser));
       })
       .catch(console.log.bind(console))
   }
