@@ -28,6 +28,8 @@ class Root extends Component {
           <NavBar />
           <Route exact path="/campuses" component={CampusList} />
           <Route exact path="/students" component={StudentList} />
+          <Route exact path="/" component={CampusList} />
+
         </div>
       </BrowserRouter>
     )
