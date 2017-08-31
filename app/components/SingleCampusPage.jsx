@@ -6,10 +6,10 @@ import StudentList from './StudentList'
 
 
 export default function SingleCampusPage(props) {
-  const id = props.match.params.id;
+  const id = Number(props.match.params.id);
   return (
     <div className="panel panel-primary">
-      <Campus id={+id} />
+      <Campus id={id} />
       <StudentList campusId={id} />
     </div>
   )

@@ -19,9 +19,11 @@ class StudentList extends Component {
     return (
       <div className="container">
         <div className="">
-          {this.props.students.map((student => {
-            return <Student key={student.id} id={student.id} />
-          }))}
+          {
+            this.props.students.map((student) => {
+              return <Student key={student.id} id={student.id} />
+            })
+          }
         </div>
       </div>
     )
@@ -30,9 +32,11 @@ class StudentList extends Component {
 
 const mapState = (state, ownProps) => {
   return {
-    students: state.students.filter( (student) => {
-      return student.campusId === ownProps.campusId || (ownProps.campusId === undefined);
-    } ),
+    //if we don't define the campusId we want to return every student
+    //if we do have a campusId, we should list only students on that campus
+    students: state.students.filter((student) => {
+      return ((student.campusId === ownProps.campusId) || (ownProps.campusId === undefined));
+    }),
   }
 };
 const mapDispatch = (dispatch) => {

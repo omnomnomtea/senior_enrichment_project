@@ -97,8 +97,8 @@ export const modifyCampus = (campus) => {
   return (dispatch) => {
     axios.put('/api/campuses/', campus)
       .then(res => res.data)
-      .then(campus => {
-        dispatch(campusModifed(campus));
+      .then(returnedCampus => {
+        dispatch(campusModifed(returnedCampus));
       })
       .catch(console.log.bind(console))
   }

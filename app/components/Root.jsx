@@ -3,13 +3,13 @@ import { connect } from 'react-redux';
 import { BrowserRouter, Route } from 'react-router-dom';
 
 import NavBar from './NavBar';
-import Campus from './Campus';
 import CampusList from './CampusList';
-import Student from './Student';
 import StudentList from './StudentList'
 import { loadCampuses } from '../reducers/campusReducer';
 import { loadStudents } from '../reducers/studentReducer';
-import SingleCampusPage from './SingleCampusPage'
+import SingleCampusPage from './SingleCampusPage';
+import SingleStudentPage from './SingleStudentPage'
+
 
 
 class Root extends Component {
@@ -30,6 +30,7 @@ class Root extends Component {
           <Route exact path="/campuses" component={CampusList} />
           <Route exact path="/students" component={StudentList} />
           <Route path="/campus/:id" component={SingleCampusPage} />
+          <Route path="/student/:id" component={SingleStudentPage} />
           <Route exact path="/" component={CampusList} />
         </div>
       </BrowserRouter>
