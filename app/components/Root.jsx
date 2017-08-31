@@ -29,7 +29,6 @@ class Root extends Component {
           <Route exact path="/campuses" component={CampusList} />
           <Route exact path="/students" component={StudentList} />
           <Route exact path="/" component={CampusList} />
-
         </div>
       </BrowserRouter>
     )
