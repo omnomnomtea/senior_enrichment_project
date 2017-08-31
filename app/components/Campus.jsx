@@ -6,12 +6,14 @@ class Campus extends Component {
 
   render() {
     return (
-      <div className="student-box">
-        <li>
-        <p>{this.props.campus.name}</p>
-        <img src={this.props.campus.image} />
-        <button onClick={this.props.deleteCampus}>x</button>
-        </li>
+      <div className="panel panel-primary col-sm-12 col-md-6 col-lg-4">
+        <div className="panel panel-heading col-12">
+          {this.props.campus.name}
+        </div>
+        <div className="panel panel-body col-12">
+          <img src={this.props.campus.image} height="175px" />
+          <button onClick={this.props.deleteCampus}>x</button>
+        </div>
       </div>
     )
   }

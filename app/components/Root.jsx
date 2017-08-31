@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { BrowserRouter, Route } from 'react-router';
+//import { BrowserRouter, Route } from 'react-router';
 
-import NavBar from './NavBar';
+//import NavBar from './NavBar';
 import Campus from './Campus';
-import { createCampus, modifyCampus, deleteCampus, loadCampuses } from '../reducers/campusReducer'
+import { loadCampuses } from '../reducers/campusReducer'
 
 
 class Root extends Component {
@@ -18,10 +18,12 @@ class Root extends Component {
 
   render() {
     return (
-      <div>
-      {this.props.campuses.map( (campus => {
-        return <Campus key={campus.id} id={campus.id} />
-      }))}
+      <div className="container">
+        <div className="">
+          {this.props.campuses.map((campus => {
+            return <Campus key={campus.id} id={campus.id} />
+          }))}
+        </div>
       </div>
     )
   }
@@ -36,7 +38,7 @@ const mapState = (state, ownProps) => {
 };
 const mapDispatch = (dispatch) => {
   return {
-    loadCampuses: () => {dispatch(loadCampuses())}
+    loadCampuses: () => { dispatch(loadCampuses()) }
   }
 };
 
