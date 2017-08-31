@@ -27,10 +27,10 @@ class Root extends Component {
       <BrowserRouter>
         <div className="container">
           <NavBar />
-          <Route exact path="/campuses" component={CampusList} />
-          <Route exact path="/students" component={StudentList} />
-          <Route path="/campus/:id" component={SingleCampusPage} />
-          <Route path="/student/:id" component={SingleStudentPage} />
+          <Route exact path="/campuses/" component={CampusList} />
+          <Route exact path="/students/" component={StudentList} />
+          <Route path="/campus/:id/" component={SingleCampusPage} />
+          <Route path="/student/:id/" component={SingleStudentPage} />
           <Route exact path="/" component={CampusList} />
         </div>
       </BrowserRouter>

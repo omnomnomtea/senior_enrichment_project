@@ -1,27 +1,21 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-//import { BrowserRouter, Route } from 'react-router';
-
-//import NavBar from './NavBar';
 import Campus from './Campus';
 
-class CampusList extends Component {
-  render() {
+function CampusList (props) {
     return (
-        <div className="">
-          {this.props.campuses.map((campus => {
-            return <Campus key={campus.id} id={campus.id} />
-          }))}
-        </div>
+      <div className="">
+        <h2>Campuses</h2>
+        {props.campuses.map((campus => {
+          return <Campus key={campus.id} id={campus.id} />
+        }))}
+      </div>
     )
-  }
 }
 
-const mapState = (state, ownProps) => {
+const mapState = (state) => {
   return {
     campuses: state.campuses,
-    users: state.users,
-    students: state.students,
   }
 };
 const mapDispatch = (dispatch) => {

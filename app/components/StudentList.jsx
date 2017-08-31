@@ -19,11 +19,12 @@ class StudentList extends Component {
     return (
       <div className="container">
         <div className="">
-          {
-            this.props.students.map((student) => {
-              return <Student key={student.id} id={student.id} />
-            })
-          }
+            <h2>Students</h2>
+            {
+              this.props.students.map( (student) => {
+                return (<Student key={student.id} id={student.id} />)
+              })
+            }
         </div>
       </div>
     )
