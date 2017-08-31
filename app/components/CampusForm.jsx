@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { createCampus } from '../reducers/campusReducer'
+import { modifyCampus, createCampus } from '../reducers/campusReducer'
 import { connect } from 'react-redux';
 
 
@@ -28,7 +28,7 @@ class CampusForm extends Component {
         <input type="text" onChange={this.onUpdateImage} value={this.state.image} name="imageURL" />
         </label>
 
-        <button className="btn btn-success" type="submit" disabled={!this.enableSubmit()}>Add Campus</button>
+        <button className="btn btn-success" type="submit" disabled={!this.enableSubmit()}>{this.props.id ? "Edit" : "Add"} Campus</button>
       </form>
     )
   }
@@ -46,13 +46,23 @@ class CampusForm extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    if (this.enableSubmit()) {
+    if (this.enableSubmit()) { //only allow submission when fields are filled out
+      if (!this.props.id) { //if we're creating a new campus
+        const campus = {
+          name: this.state.name,
+          image: this.state.image
+        };
+        this.props.createCampus(campus);
+        this.setState({ name: '', image: '', nameDirty: false, imageDirty: false })
+      }
+      else {//if we're editing a campus
       const campus = {
         name: this.state.name,
         image: this.state.image
       };
-      this.props.createCampus(campus);
+      this.props.editCampus(campus);
       this.setState({ name: '', image: '', nameDirty: false, imageDirty: false })
+      }
     }
   }
 
@@ -68,7 +78,8 @@ const mapState = (state, ownProps) => {
 
 const mapDispatch = (dispatch) => {
   return {
-    createCampus: (campus) => dispatch(createCampus(campus))
+    createCampus: (campus) => dispatch(createCampus(campus)),
+    editCampus: (campus) => dispatch(modifyCampus(campus))
   }
 }
 

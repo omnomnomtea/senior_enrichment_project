@@ -10,6 +10,7 @@ import { loadStudents } from '../reducers/studentReducer';
 import SingleCampusPage from './SingleCampusPage';
 import SingleStudentPage from './SingleStudentPage';
 import CampusForm from './CampusForm';
+import StudentForm from './StudentForm';
 
 
 class Root extends Component {
@@ -29,7 +30,10 @@ class Root extends Component {
           <NavBar />
           <Route exact path="/campuses/" component={CampusList} />
           <Route exact path="/students/" component={StudentList} />
-          <Route exact path="/editCampus/" component={CampusForm} />
+          <Route exact path="/editcampus/" component={CampusForm} />
+          <Route path="/editcampus/:id" component={CampusForm} />
+          <Route exact path="/editstudent/" component={StudentForm} />
+          <Route path="/editstudent/:id" component={StudentForm} />
           <Route path="/campus/:id/" component={SingleCampusPage} />
           <Route path="/student/:id/" component={SingleStudentPage} />
           <Route exact path="/" component={CampusList} />

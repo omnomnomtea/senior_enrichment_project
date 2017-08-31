@@ -24,12 +24,16 @@ class StudentForm extends Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <label>Name:
-          <input type="text" onChange={this.onUpdateName} value={this.state.name} name="campusName" />
+        <label>First Name:
+          <input type="text" onChange={this.onUpdateFirstName} value={this.state.firstName} name="firstName" />
         </label>
 
-        <label>Image URL:
-        <input type="text" onChange={this.onUpdateImage} value={this.state.image} name="imageURL" />
+        <label>Last Name:
+        <input type="text" onChange={this.onUpdateLastName} value={this.state.lastName} name="lastName" />
+        </label>
+
+        <label>Email:
+        <input type="text" onChange={this.onUpdateEmail} value={this.state.email} name="imageURL" />
         </label>
 
         <button className="btn btn-success" type="submit" disabled={!this.enableSubmit()}>Add Student</button>
@@ -41,7 +45,7 @@ class StudentForm extends Component {
     this.setState({ firstName: event.target.value, firstNameDirty: true });
   }
   onUpdateLastName(event) {
-    this.setState({ Lastname: event.target.value, firstNameDirty: true });
+    this.setState({ lastName: event.target.value, firstNameDirty: true });
   }
   onUpdateEmail(event) {
     this.setState({ email: event.target.value, emailDirty: true });
@@ -60,7 +64,7 @@ class StudentForm extends Component {
         email: this.state.email
       };
       this.props.createStudent(student);
-      this.setState({ name: '', image: '', firstNameDirty: false, lastNameDirty: false, emailDirty: false })
+      this.setState({ firstName: '', lastName: '', email: '', firstNameDirty: false, lastNameDirty: false, emailDirty: false })
     }
   }
 
@@ -69,8 +73,7 @@ class StudentForm extends Component {
 
 const mapState = (state, ownProps) => {
   return {
-    name: ownProps.name,
-    image: ownProps.image
+    id: ownProps.match.params.id,
   }
 };
 
