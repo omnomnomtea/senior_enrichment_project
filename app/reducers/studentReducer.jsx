@@ -7,7 +7,7 @@ import axios from 'axios';
 const STUDENT_ADDED = 'STUDENT_ADDED';
 const STUDENT_DELETED = 'STUDENT_DELETED';
 const STUDENT_MODIFIED = 'STUDENT_MODIFIED';
-
+const STUDENTS_LOADED = 'STUDENTS_LOADED';
 
 //-------------------------------------
 //ACTION CREATORS
@@ -34,6 +34,14 @@ export const studentModified = (student) => {
   }
 }
 
+export const studentsLoaded = (students) => {
+  return {
+    type: STUDENTS_LOADED,
+    students: students
+  }
+}
+
+
 //-------------------------------------
 //REDUCER
 //-------------------------------------
@@ -53,6 +61,8 @@ const reducer = (state = [], action) => {
       newState = state.slice(0, oldIndex);
       newState = newState.concat(state.slice(oldIndex + 1));
       return newState;
+    case STUDENTS_LOADED:
+      return action.students;
     default:
       return state;
   }
@@ -93,6 +103,16 @@ export const modifyStudent = (student) => {
   }
 }
 
+export const loadStudents = () => {
+  return (dispatch) => {
+    axios.get('/api/students/')
+      .then(res => res.data)
+      .then(students => {
+        dispatch(studentsLoaded(students));
+      })
+      .catch(console.log.bind(console))
+  }
+}
 
 //-------------------------------------
 // DEFAULT EXPORT (placed here for ease finding it later)

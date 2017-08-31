@@ -76,7 +76,6 @@ export const createCampus = (campus) => {
   return (dispatch) => {
     axios.post('/api/campuses/', campus)
       .then(res => res.data)
-
       .then(returnedCampus => {
         dispatch(campusAdded(returnedCampus));
       })

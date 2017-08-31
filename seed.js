@@ -15,7 +15,7 @@ var data = {
   student: [
     { firstName: "Han", lastName: "Solo", email: "falcon@millenium.edu" },
     { firstName: "Leia", lastName: "Organa", email: "princess@aldaraan.gov" },
-    { firstName: "Luke", lastName: "Skywalker", email: "r2d2@changemyemailback.edu" },
+    { firstName: "Luke", lastName: "Skywalker", email: "lukesr2@isthebestdroid.edu" },
     { firstName: "Poe", lastName: "Dameron", email: "bleh@rebel.com" },
     { firstName: "Chewbacca", lastName: "idk", email: "bleh@bleh.edu" },
     { firstName: "Darth", lastName: "Vader", email: "anakin@skywalker.com" },

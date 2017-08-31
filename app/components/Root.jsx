@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-//import { BrowserRouter, Route } from 'react-router';
+import { BrowserRouter, Route } from 'react-router-dom';
 
-//import NavBar from './NavBar';
+import NavBar from './NavBar';
 import Campus from './Campus';
-import CampusList from './CampusList'
-import { loadCampuses } from '../reducers/campusReducer'
+import CampusList from './CampusList';
+import Student from './Student';
+import StudentList from './StudentList'
+import { loadCampuses } from '../reducers/campusReducer';
+import { loadStudents } from '../reducers/studentReducer';
 
 
 class Root extends Component {
@@ -15,13 +18,18 @@ class Root extends Component {
 
   componentDidMount() {
     this.props.loadCampuses();
+    this.props.loadStudents();
   }
 
   render() {
     return (
-      <div className="container">
-        <CampusList />
-      </div>
+      <BrowserRouter>
+        <div className="container">
+          <NavBar />
+          <Route exact path="/campuses" component={CampusList} />
+          <Route exact path="/students" component={StudentList} />
+        </div>
+      </BrowserRouter>
     )
   }
 }
@@ -35,11 +43,10 @@ const mapState = (state, ownProps) => {
 };
 const mapDispatch = (dispatch) => {
   return {
-    loadCampuses: () => { dispatch(loadCampuses()) }
+    loadCampuses: () => { dispatch(loadCampuses()) },
+    loadStudents: () => { dispatch(loadStudents()) }
   }
 };
 
 const BetterRoot = connect(mapState, mapDispatch)(Root);
-
-
 export default BetterRoot;
