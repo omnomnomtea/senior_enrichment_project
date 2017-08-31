@@ -12,4 +12,4 @@
 2. Click around! 😊
 
 ## Known bugs
-- NONE RIGHT NOW 😊😊😊
+- if you put an invalid url into the image field when editing or updating a campus, it will fail silently
