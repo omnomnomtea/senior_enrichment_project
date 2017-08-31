@@ -29,6 +29,9 @@ class Campus extends Component {
             {this.props.campus.name}
           </Link>
           <button className='btn btn-danger pull-right' onClick={this.handleDeleteClick}>x</button>
+          <Link to={`/editcampus/${this.props.id}`}>
+          <button className='btn btn-warning pull-right'><span className="glyphicon glyphicon-pencil" /></button>
+          </Link>
         </div>
         <div className="panel-body">
           <img src={this.props.campus.image} height="175px" />

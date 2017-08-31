@@ -6,30 +6,43 @@ import { connect } from 'react-redux';
 class CampusForm extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       name: '',
       image: '',
       nameDirty: false,
       imageDirty: false,
     }
+
     this.handleSubmit = this.handleSubmit.bind(this);
     this.onUpdateImage = this.onUpdateImage.bind(this);
     this.onUpdateName = this.onUpdateName.bind(this);
+    this.enableSubmit = this.enableSubmit.bind(this);
   }
 
   render() {
+    if (this.props.campuses.length <= 0) {
+      return (<div />);
+    }
+
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label>Name:
+      <div>
+        <h2>{this.props.id ? "Edit" : "Add New"} Campus {!!this.props.campus && this.props.campus.name}</h2>
+        <form onSubmit={this.handleSubmit}>
+
+          <label>{!!this.props.id && "New "}Name:
           <input type="text" onChange={this.onUpdateName} value={this.state.name} name="campusName" />
-        </label>
+          </label>
 
-        <label>Image URL:
+          <label>{!!this.props.id && "New "}Image URL:
         <input type="text" onChange={this.onUpdateImage} value={this.state.image} name="imageURL" />
-        </label>
+          </label>
 
-        <button className="btn btn-success" type="submit" disabled={!this.enableSubmit()}>{this.props.id ? "Edit" : "Add"} Campus</button>
-      </form>
+          <button className="btn btn-success" type="submit" disabled={!this.enableSubmit()}>
+            {this.props.id ? "Edit" : "Add"} Campus
+        </button>
+        </form>
+      </div>
     )
   }
 
@@ -39,40 +52,39 @@ class CampusForm extends Component {
   onUpdateImage(event) {
     this.setState({ image: event.target.value, imageDirty: true });
   }
-
   enableSubmit() {
     return this.state.name && this.state.image;
   }
 
   handleSubmit(event) {
     event.preventDefault();
+
     if (this.enableSubmit()) { //only allow submission when fields are filled out
+      let campus = {}
+      if (this.state.name) campus.name = this.state.name;
+      if (this.state.image) campus.image = this.state.image;
       if (!this.props.id) { //if we're creating a new campus
-        const campus = {
-          name: this.state.name,
-          image: this.state.image
-        };
         this.props.createCampus(campus);
         this.setState({ name: '', image: '', nameDirty: false, imageDirty: false })
       }
-      else {//if we're editing a campus
-      const campus = {
-        name: this.state.name,
-        image: this.state.image
-      };
-      this.props.editCampus(campus);
-      this.setState({ name: '', image: '', nameDirty: false, imageDirty: false })
+      else {//we're editing a campus
+        campus.id = this.props.id;
+        this.props.editCampus(campus);
+        this.setState({ name: '', image: '', nameDirty: false, imageDirty: false })
       }
     }
+
   }
 
 }
 
-
 const mapState = (state, ownProps) => {
+  const id = Number(ownProps.match.params.id);
   return {
-    name: ownProps.name,
-    image: ownProps.image
+    id: id,
+    history: ownProps.history,
+    campuses: state.campuses,
+    campus: state.campuses.find(campus => campus.id === id)
   }
 };
 

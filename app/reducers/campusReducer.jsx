@@ -95,7 +95,7 @@ export const deleteCampus = (campus) => {
 
 export const modifyCampus = (campus) => {
   return (dispatch) => {
-    axios.put('/api/campuses/', campus)
+    axios.put(`/api/campuses/${campus.id}`, campus)
       .then(res => res.data)
       .then(returnedCampus => {
         dispatch(campusModifed(returnedCampus));

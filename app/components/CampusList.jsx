@@ -1,11 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Campus from './Campus';
+import {Link } from 'react-router-dom';
 
 function CampusList(props) {
   return (
     <div>
-      <h2>Campuses <button className='btn btn-success'>+</button> </h2>
+      <h2>Campuses
+      <Link to='/editCampus'>
+      <button className='btn btn-success'>+</button>
+      </Link>
+      </h2>
       {props.campuses.map((campus => {
         return (
           <div key={campus.id} className="col-sm-12 col-md-6 col-lg-4">
