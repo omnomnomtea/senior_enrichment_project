@@ -5,7 +5,7 @@ import {Link } from 'react-router-dom';
 
 function CampusList(props) {
   return (
-    <div>
+    <div className="container">
       <h2>Campuses
       <Link to='/editCampus'>
       <button className='btn btn-success'>+</button>

@@ -21,6 +21,27 @@ class StudentForm extends Component {
     this.onUpdateCampus = this.onUpdateCampus.bind(this);
   }
 
+
+  componentDidMount() {
+    this.tryToSetState(this.props);
+  }
+
+  componentWillReceiveProps(nextProps){
+    this.tryToSetState(nextProps);
+  }
+
+  tryToSetState(props) {
+    if (props.student) { //if props has info...
+      this.setState({
+        id: props.id,
+        firstName: props.student.firstName,
+        lastName: props.student.lastName,
+        email: props.student.email,
+        campusId: props.student.campusId,
+      })
+    }
+  }
+
   render() {
     return (
       <div>
@@ -65,7 +86,7 @@ class StudentForm extends Component {
           </div>
 
           <button className="btn btn-success" type="submit" disabled={!this.enableSubmit()}>
-            {!!this.props.id ? 'Edit' : 'Add'} Student
+            {this.props.id ? 'Edit' : 'Add'} Student
           </button>
         </form>
       </div>
@@ -95,17 +116,27 @@ class StudentForm extends Component {
         firstName: this.state.firstName,
         lastName: this.state.lastName,
         email: this.state.email,
-        campusId: this.state.campusId
+        campusId: this.state.campusId,
+        id: this.state.id
       };
 
+      let id;
       if (!this.props.id) {
         this.props.createStudent(student);
+        id = this.props.id;
       }
       else {
         this.props.editStudent(student);
       }
 
       this.setState({ firstName: '', lastName: '', email: '', firstNameDirty: false, lastNameDirty: false, emailDirty: false })
+
+      if (id) {
+        this.props.history.push(`/student/${id}`);
+      }
+      else {
+        this.props.history.push(`/students/`)
+      }
     }
   }
 
@@ -123,6 +154,7 @@ const mapState = (state, ownProps) => {
     id: id,
     campuses: state.campuses,
     student: student,
+    history: ownProps.history
   }
 };
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
+import {Link } from 'react-router-dom'
 import Student from './Student';
 
 
@@ -12,14 +12,16 @@ class StudentList extends Component {
   render() {
     return (
       <div className="container">
-        <div className="">
-            <h2>Students <button className='btn btn-success'>+</button></h2>
-            {
-              this.props.students.map( (student) => {
-                return (<Student key={student.id} id={student.id} />)
-              })
-            }
-        </div>
+        <h2>Students
+        <Link to={`/editStudent/`}>
+        <button className='btn btn-success'>+</button>
+        </Link>
+        </h2>
+        {
+          this.props.students.map((student) => {
+            return (<Student key={student.id} id={student.id} />)
+          })
+        }
       </div>
     )
   }

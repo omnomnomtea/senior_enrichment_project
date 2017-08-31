@@ -94,7 +94,7 @@ export const deleteStudent = (student) => {
 
 export const modifyStudent = (student) => {
   return (dispatch) => {
-    axios.put('/api/students/', student)
+    axios.put(`/api/students/${student.id}`, student)
       .then(res => res.data)
       .then(returnedStudent => {
         dispatch(studentModified(returnedStudent));

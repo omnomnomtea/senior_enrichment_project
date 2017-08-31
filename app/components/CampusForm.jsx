@@ -20,6 +20,24 @@ class CampusForm extends Component {
     this.enableSubmit = this.enableSubmit.bind(this);
   }
 
+  componentDidMount() {
+    this.tryToSetState(this.props);
+  }
+
+  componentWillReceiveProps(nextProps){
+    this.tryToSetState(nextProps);
+  }
+
+  tryToSetState(nextProps) {
+    if (nextProps.campus) {
+      this.setState({
+        name: nextProps.campus.name,
+        image: nextProps.campus.image,
+        id: nextProps.campus.id
+      });
+    }
+  }
+
   render() {
     if (this.props.campuses.length <= 0) {
       return (<div />);
@@ -58,24 +76,27 @@ class CampusForm extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-
     if (this.enableSubmit()) { //only allow submission when fields are filled out
       let campus = {}
       if (this.state.name) campus.name = this.state.name;
       if (this.state.image) campus.image = this.state.image;
+
       if (!this.props.id) { //if we're creating a new campus
         this.props.createCampus(campus);
-        this.setState({ name: '', image: '', nameDirty: false, imageDirty: false })
       }
       else {//we're editing a campus
         campus.id = this.props.id;
         this.props.editCampus(campus);
-        this.setState({ name: '', image: '', nameDirty: false, imageDirty: false })
+      }
+      this.setState({ name: '', image: '', nameDirty: false, imageDirty: false })
+      if (!this.props.id) {
+        this.props.history.push('/campuses/')
+      }
+      else {
+        this.props.history.push(`/campus/${this.props.id}`)
       }
     }
-
   }
-
 }
 
 const mapState = (state, ownProps) => {
