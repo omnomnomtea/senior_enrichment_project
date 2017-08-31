@@ -11,7 +11,7 @@ class Student extends Component {
 
   render() {
     return (
-      <div className="panel panel-primary col-sm-12 col-md-12 col-lg-6">
+      <div className="panel panel-info col-sm-12 col-md-12 col-lg-6">
         <div className="panel panel-heading col-12">
           {this.props.student.firstName + " " + this.props.student.lastName}
         </div>

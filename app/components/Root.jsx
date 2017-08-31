@@ -9,6 +9,7 @@ import Student from './Student';
 import StudentList from './StudentList'
 import { loadCampuses } from '../reducers/campusReducer';
 import { loadStudents } from '../reducers/studentReducer';
+import SingleCampusPage from './SingleCampusPage'
 
 
 class Root extends Component {
@@ -28,6 +29,7 @@ class Root extends Component {
           <NavBar />
           <Route exact path="/campuses" component={CampusList} />
           <Route exact path="/students" component={StudentList} />
+          <Route path="/campus/:id" component={SingleCampusPage} />
           <Route exact path="/" component={CampusList} />
         </div>
       </BrowserRouter>
@@ -35,7 +37,7 @@ class Root extends Component {
   }
 }
 
-const mapState = (state, ownProps) => {
+const mapState = (state) => {
   return {
     campuses: state.campuses,
     users: state.users,

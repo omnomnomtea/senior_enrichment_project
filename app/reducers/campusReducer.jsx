@@ -14,7 +14,7 @@ const CAMPUSES_LOADED = 'CAMPUSES_LOADED';
 //ACTION CREATORS
 //-------------------------------------
 
-export const campusAdded = (campus) => {
+export const campusLoaded = (campus) => {
   return {
     type: CAMPUS_ADDED,
     campus: campus
@@ -77,7 +77,7 @@ export const createCampus = (campus) => {
     axios.post('/api/campuses/', campus)
       .then(res => res.data)
       .then(returnedCampus => {
-        dispatch(campusAdded(returnedCampus));
+        dispatch(campusLoaded(returnedCampus));
       })
       .catch(console.log.bind(console))
   }
@@ -110,6 +110,17 @@ export const loadCampuses = () => {
       .then(res => res.data)
       .then(campuses => {
         dispatch(campusesLoaded(campuses));
+      })
+      .catch(console.log.bind(console))
+  }
+}
+
+export const loadCampus = (id) => {
+  return (dispatch) => {
+    axios.get(`/api/campuses/${id}`)
+      .then(res => res.data)
+      .then(campus => {
+        dispatch(campusLoaded(campus));
       })
       .catch(console.log.bind(console))
   }

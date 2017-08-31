@@ -30,7 +30,9 @@ class StudentList extends Component {
 
 const mapState = (state, ownProps) => {
   return {
-    students: state.students,
+    students: state.students.filter( (student) => {
+      return student.campusId === ownProps.campusId || (ownProps.campusId === undefined);
+    } ),
   }
 };
 const mapDispatch = (dispatch) => {

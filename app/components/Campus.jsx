@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { createCampus, modifyCampus, deleteCampus } from '../reducers/campusReducer'
+import { loadCampus, modifyCampus, deleteCampus } from '../reducers/campusReducer'
 
 class Campus extends Component {
 
@@ -10,10 +11,23 @@ class Campus extends Component {
   }
 
   render() {
+
+    // If we go DIRECTLY to a single campus page (to /campus/1 for example)
+    // then the page with a single campus renders before the network request
+    // to load the campuses finishes. We need to render an empty component
+    // to prevent errors in this case, which we check for by seeing if the
+    // campus prop is defined
+    if (!this.props.campus) {
+      return (<div />)
+    }
+
+
     return (
-      <div className="panel panel-primary col-sm-12 col-md-6 col-lg-4">
+      <div className="panel panel-info col-sm-12 col-md-6 col-lg-4">
         <div className="panel panel-heading col-12">
-          {this.props.campus.name}
+          <Link to={'/campus/' + this.props.id}>
+            {this.props.campus.name}
+          </Link>
         </div>
         <div className="panel panel-body col-12">
           <img src={this.props.campus.image} height="175px" />
@@ -23,7 +37,7 @@ class Campus extends Component {
     )
   }
 
-  handleDeleteClick (event) {
+  handleDeleteClick(event) {
     this.props.deleteCampus(this.props.campus)
   }
 
