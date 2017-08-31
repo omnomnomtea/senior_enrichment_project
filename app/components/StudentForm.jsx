@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { createStudent } from '../reducers/studentReducer'
+import { createStudent, modifyStudent } from '../reducers/studentReducer'
 import { connect } from 'react-redux';
-
 
 class StudentForm extends Component {
   constructor(props) {
@@ -24,47 +23,52 @@ class StudentForm extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <div className="formgroup">
+      <div>
+        <h2>{this.props.id ? 'Edit' : 'Add'} Student {this.props.student && this.props.student.firstName + " " + this.props.student.lastName}</h2>
+        <form onSubmit={this.handleSubmit}>
+          <div className="formgroup">
 
-          <label className="control-label">
-            First Name:
+            <label className="control-label">
+              {!!this.props.id && "New"} First Name:
           </label>
-          <input className="form-control" type="text" onChange={this.onUpdateFirstName} value={this.state.firstName} name="firstName" />
-        </div>
-        <div className="formgroup">
+            <input className="form-control" type="text" onChange={this.onUpdateFirstName} value={this.state.firstName} name="firstName" />
+          </div>
+          <div className="formgroup">
 
-          <label className="control-label">
-            Last Name:
+            <label className="control-label">
+              {!!this.props.id && "New"} Last Name:
           </label>
-          <input className="form-control" type="text" onChange={this.onUpdateLastName} value={this.state.lastName} name="lastName" />
+            <input className="form-control" type="text" onChange={this.onUpdateLastName} value={this.state.lastName} name="lastName" />
 
-        </div>
+          </div>
 
-        <div className="formgroup">
-          <label className="control-label">
-            Email:
+          <div className="formgroup">
+            <label className="control-label">
+              {!!this.props.id && "New"} Email:
           </label>
-          <input className="form-control" type="text" onChange={this.onUpdateEmail} value={this.state.email} name="imageURL" />
-        </div>
+            <input className="form-control" type="text" onChange={this.onUpdateEmail} value={this.state.email} name="imageURL" />
+          </div>
 
-        <div className="formgroup">
-          <label className="control-label">
-            Campus
+          <div className="formgroup">
+            <label className="control-label">
+              {!!this.props.id && "New"} Campus
           </label>
-          <select className="form-control" value={this.state.campusId} onChange={this.onUpdateCampus}>
-            {
-              this.props.campuses.map((campus) => {
-                return (
-                  <option key={campus.id} value={campus.id}>{campus.name}</option>
-                )
-              })
-            }
-          </select>
-        </div>
+            <select className="form-control" value={this.state.campusId} onChange={this.onUpdateCampus}>
+              {
+                this.props.campuses.map((campus) => {
+                  return (
+                    <option key={campus.id} value={campus.id}>{campus.name}</option>
+                  )
+                })
+              }
+            </select>
+          </div>
 
-        <button className="btn btn-success" type="submit" disabled={!this.enableSubmit()}>Add Student</button>
-      </form>
+          <button className="btn btn-success" type="submit" disabled={!this.enableSubmit()}>
+            {!!this.props.id ? 'Edit' : 'Add'} Student
+          </button>
+        </form>
+      </div>
     )
   }
 
@@ -93,7 +97,14 @@ class StudentForm extends Component {
         email: this.state.email,
         campusId: this.state.campusId
       };
-      this.props.createStudent(student);
+
+      if (!this.props.id) {
+        this.props.createStudent(student);
+      }
+      else {
+        this.props.editStudent(student);
+      }
+
       this.setState({ firstName: '', lastName: '', email: '', firstNameDirty: false, lastNameDirty: false, emailDirty: false })
     }
   }
@@ -102,15 +113,23 @@ class StudentForm extends Component {
 
 
 const mapState = (state, ownProps) => {
+  let id;
+  let student;
+  if (ownProps.match) {
+    id = Number(ownProps.match.params.id);
+    student = state.students.find(searchStudent => searchStudent.id === id);
+  }
   return {
-    id: ownProps.match.params.id,
-    campuses: state.campuses
+    id: id,
+    campuses: state.campuses,
+    student: student,
   }
 };
 
 const mapDispatch = (dispatch) => {
   return {
-    createStudent: (student) => dispatch(createStudent(student))
+    createStudent: (student) => dispatch(createStudent(student)),
+    editStudent: (student) => dispatch(modifyStudent(student))
   }
 }
 
