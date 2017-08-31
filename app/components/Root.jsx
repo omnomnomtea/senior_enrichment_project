@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 //import NavBar from './NavBar';
 import Campus from './Campus';
+import CampusList from './CampusList'
 import { loadCampuses } from '../reducers/campusReducer'
 
 
@@ -19,11 +20,7 @@ class Root extends Component {
   render() {
     return (
       <div className="container">
-        <div className="">
-          {this.props.campuses.map((campus => {
-            return <Campus key={campus.id} id={campus.id} />
-          }))}
-        </div>
+        <CampusList />
       </div>
     )
   }

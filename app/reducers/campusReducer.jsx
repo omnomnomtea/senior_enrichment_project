@@ -86,7 +86,7 @@ export const createCampus = (campus) => {
 
 export const deleteCampus = (campus) => {
   return (dispatch) => {
-    axios.delete(`/api/campuss/${campus.id}`)
+    axios.delete(`/api/campuses/${campus.id}`)
       .then(() => {
         dispatch(campusDeleted(campus));
       })

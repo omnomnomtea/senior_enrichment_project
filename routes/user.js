@@ -39,7 +39,7 @@ router.put('/userId', (req, res, next) => {
 router.delete('/:userId', (req, res, next) => {
   User.findById(req.params.userId)
     .then((user) => {
-      return user.delete();
+      return user.destroy();
     })
     .then(() => {
       res.sendStatus(200);

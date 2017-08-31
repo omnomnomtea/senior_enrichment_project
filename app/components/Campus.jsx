@@ -4,6 +4,11 @@ import { createCampus, modifyCampus, deleteCampus } from '../reducers/campusRedu
 
 class Campus extends Component {
 
+  constructor() {
+    super();
+    this.handleDeleteClick = this.handleDeleteClick.bind(this);
+  }
+
   render() {
     return (
       <div className="panel panel-primary col-sm-12 col-md-6 col-lg-4">
@@ -12,10 +17,14 @@ class Campus extends Component {
         </div>
         <div className="panel panel-body col-12">
           <img src={this.props.campus.image} height="175px" />
-          <button onClick={this.props.deleteCampus}>x</button>
+          <button onClick={this.handleDeleteClick}>x</button>
         </div>
       </div>
     )
+  }
+
+  handleDeleteClick (event) {
+    this.props.deleteCampus(this.props.campus)
   }
 
 }
@@ -27,6 +36,8 @@ const mapState = (state, ownProps) => {
     id: ownProps.id
   }
 };
+
+
 const mapDispatch = (dispatch) => {
   return {
     deleteCampus: (campus) => { dispatch(deleteCampus(campus)) },
