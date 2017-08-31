@@ -10,6 +10,7 @@ class StudentForm extends Component {
       firstName: '',
       lastName: '',
       email: '',
+      campusId: 0,
       firstNameDirty: false,
       lastNameDirty: false,
       emailDirty: false,
@@ -18,23 +19,49 @@ class StudentForm extends Component {
     this.onUpdateFirstName = this.onUpdateFirstName.bind(this);
     this.onUpdateLastName = this.onUpdateLastName.bind(this);
     this.onUpdateEmail = this.onUpdateEmail.bind(this);
-
+    this.onUpdateCampus = this.onUpdateCampus.bind(this);
   }
 
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <label>First Name:
-          <input type="text" onChange={this.onUpdateFirstName} value={this.state.firstName} name="firstName" />
-        </label>
+        <div className="formgroup">
 
-        <label>Last Name:
-        <input type="text" onChange={this.onUpdateLastName} value={this.state.lastName} name="lastName" />
-        </label>
+          <label className="control-label">
+            First Name:
+          </label>
+          <input className="form-control" type="text" onChange={this.onUpdateFirstName} value={this.state.firstName} name="firstName" />
+        </div>
+        <div className="formgroup">
 
-        <label>Email:
-        <input type="text" onChange={this.onUpdateEmail} value={this.state.email} name="imageURL" />
-        </label>
+          <label className="control-label">
+            Last Name:
+          </label>
+          <input className="form-control" type="text" onChange={this.onUpdateLastName} value={this.state.lastName} name="lastName" />
+
+        </div>
+
+        <div className="formgroup">
+          <label className="control-label">
+            Email:
+          </label>
+          <input className="form-control" type="text" onChange={this.onUpdateEmail} value={this.state.email} name="imageURL" />
+        </div>
+
+        <div className="formgroup">
+          <label className="control-label">
+            Campus
+          </label>
+          <select className="form-control" value={this.state.campusId} onChange={this.onUpdateCampus}>
+            {
+              this.props.campuses.map((campus) => {
+                return (
+                  <option key={campus.id} value={campus.id}>{campus.name}</option>
+                )
+              })
+            }
+          </select>
+        </div>
 
         <button className="btn btn-success" type="submit" disabled={!this.enableSubmit()}>Add Student</button>
       </form>
@@ -50,7 +77,9 @@ class StudentForm extends Component {
   onUpdateEmail(event) {
     this.setState({ email: event.target.value, emailDirty: true });
   }
-
+  onUpdateCampus(event) {
+    this.setState({ campusId: event.target.value });
+  }
   enableSubmit() {
     return this.state.firstName && this.state.lastName && this.state.email;
   }
@@ -61,7 +90,8 @@ class StudentForm extends Component {
       const student = {
         firstName: this.state.firstName,
         lastName: this.state.lastName,
-        email: this.state.email
+        email: this.state.email,
+        campusId: this.state.campusId
       };
       this.props.createStudent(student);
       this.setState({ firstName: '', lastName: '', email: '', firstNameDirty: false, lastNameDirty: false, emailDirty: false })
@@ -74,6 +104,7 @@ class StudentForm extends Component {
 const mapState = (state, ownProps) => {
   return {
     id: ownProps.match.params.id,
+    campuses: state.campuses
   }
 };
 
