@@ -17,7 +17,12 @@ var data = {
     { firstName: 'Leia', lastName: 'Organa', email: 'princess@aldaraan.gov' },
     { firstName: 'Luke', lastName: 'Skywalker', email: 'lukesr2@isthebestdroid.edu' },
     { firstName: 'Poe', lastName: 'Dameron', email: 'bleh@rebel.com' },
-    { firstName: 'Chewbacca', lastName: 'idk', email: 'bleh@bleh.edu' },
+    { firstName: 'Chewbacca', lastName: 'Solo', email: 'bleh@bleh.edu' },
+    //I don't know what Chewbacca's last name is or if
+    // he has one, and I like this being a mystery so I didn't google it.
+    // Originally I put his last name as "idk" but that bothered me
+    // So I decided that Han adopted him. Or they're married or something.
+    // You can decide for yourself
     { firstName: 'Darth', lastName: 'Vader', email: 'anakin@skywalker.com' },
 
   ],

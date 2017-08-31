@@ -19,24 +19,26 @@ class Student extends Component {
     const id = this.props.student.id;
 
     return (
-      <div className="panel panel-info col-sm-12 col-md-12 col-lg-6">
-        <div className="panel panel-heading col-12">
-          <Link to={`/student/${id}`}>{this.props.student.firstName + " " + this.props.student.lastName}</Link>
+      <div className="panel panel-info">
+        <div className="clearfix panel panel-heading">
+          <Link to={`/student/${id}`}>
+            {this.props.student.firstName + ' ' + this.props.student.lastName}
+          </Link>
+          <button className='btn btn-danger pull-right' onClick={this.handleDeleteClick}>x</button>
         </div>
-        <div className="panel panel-body col-12">
-          <p>{this.props.student.email}</p>
+        <div className="panel-body">
+          <p>Email: {this.props.student.email}</p>
           <p>Campus: <Link to={`/campus/${campusId}`}>{this.getCampus(campusId).name}</Link></p>
-          <button onClick={this.handleDeleteClick}>x</button>
         </div>
       </div>
     )
   }
 
-  handleDeleteClick (event) {
+  handleDeleteClick(event) {
     this.props.deleteStudent(this.props.student)
   }
 
-  getCampus(id){
+  getCampus(id) {
     return this.props.campuses.find(campus => campus.id === id)
   }
 

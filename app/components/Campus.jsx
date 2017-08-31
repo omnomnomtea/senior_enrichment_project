@@ -23,15 +23,15 @@ class Campus extends Component {
 
 
     return (
-      <div className="panel panel-info col-sm-12 col-md-6 col-lg-4">
-        <div className="panel panel-heading col-12">
+      <div className="panel panel-info">
+        <div className="clearfix panel panel-heading">
           <Link to={'/campus/' + this.props.id}>
             {this.props.campus.name}
           </Link>
+          <button className='btn btn-danger pull-right' onClick={this.handleDeleteClick}>x</button>
         </div>
-        <div className="panel panel-body col-12">
+        <div className="panel-body">
           <img src={this.props.campus.image} height="175px" />
-          <button onClick={this.handleDeleteClick}>x</button>
         </div>
       </div>
     )

@@ -4,12 +4,12 @@ import { BrowserRouter, Route } from 'react-router-dom';
 
 import NavBar from './NavBar';
 import CampusList from './CampusList';
-import StudentList from './StudentList'
+import StudentList from './StudentList';
 import { loadCampuses } from '../reducers/campusReducer';
 import { loadStudents } from '../reducers/studentReducer';
 import SingleCampusPage from './SingleCampusPage';
-import SingleStudentPage from './SingleStudentPage'
-
+import SingleStudentPage from './SingleStudentPage';
+import CampusForm from './CampusForm';
 
 
 class Root extends Component {
@@ -29,6 +29,7 @@ class Root extends Component {
           <NavBar />
           <Route exact path="/campuses/" component={CampusList} />
           <Route exact path="/students/" component={StudentList} />
+          <Route exact path="/editCampus/" component={CampusForm} />
           <Route path="/campus/:id/" component={SingleCampusPage} />
           <Route path="/student/:id/" component={SingleStudentPage} />
           <Route exact path="/" component={CampusList} />

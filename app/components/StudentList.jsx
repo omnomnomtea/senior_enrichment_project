@@ -1,13 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-//import { BrowserRouter, Route } from 'react-router';
 
-//import NavBar from './NavBar';
-import Campus from './Campus';
-import CampusList from './CampusList';
 import Student from './Student';
-import { loadCampuses } from '../reducers/campusReducer';
-import { loadStudents } from '../reducers/studentReducer';
 
 
 class StudentList extends Component {
@@ -19,7 +13,7 @@ class StudentList extends Component {
     return (
       <div className="container">
         <div className="">
-            <h2>Students</h2>
+            <h2>Students <button className='btn btn-success'>+</button></h2>
             {
               this.props.students.map( (student) => {
                 return (<Student key={student.id} id={student.id} />)
