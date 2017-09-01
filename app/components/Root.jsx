@@ -14,10 +14,6 @@ import StudentForm from './StudentForm';
 
 
 class Root extends Component {
-  constructor() {
-    super()
-  }
-
   componentDidMount() {
     this.props.loadCampuses();
     this.props.loadStudents();

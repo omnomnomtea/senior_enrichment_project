@@ -3,7 +3,6 @@ import axios from 'axios';
 //-------------------------------------
 //ACTION TYPES
 //-------------------------------------
-
 const USER_ADDED = 'USER_ADDED';
 const USER_DELETED = 'USER_DELETED';
 const USER_MODIFIED = 'USER_MODIFIED';
@@ -12,7 +11,6 @@ const USER_MODIFIED = 'USER_MODIFIED';
 //-------------------------------------
 //ACTION CREATORS
 //-------------------------------------
-
 export const userAdded = (user) => {
   return {
     type: USER_ADDED,
@@ -37,7 +35,6 @@ export const userModified = (user) => {
 //-------------------------------------
 //REDUCER
 //-------------------------------------
-
 const reducer = (state = [], action) => {
   let newState = [];
   switch (action.type) {

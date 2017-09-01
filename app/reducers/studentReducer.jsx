@@ -45,7 +45,6 @@ export const studentsLoaded = (students) => {
 //-------------------------------------
 //REDUCER
 //-------------------------------------
-
 const reducer = (state = [], action) => {
   let newState = [];
   switch (action.type) {

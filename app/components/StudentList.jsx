@@ -36,9 +36,7 @@ const mapState = (state, ownProps) => {
     }),
   }
 };
-const mapDispatch = (dispatch) => {
-  return {}
-};
+const mapDispatch = () => {};
 
 const BetterStudentList = connect(mapState, mapDispatch)(StudentList);
 export default BetterStudentList;

@@ -9,10 +9,7 @@ export default function SingleCampusPage(props) {
   const id = Number(props.match.params.id);
   return (
     <div className="col-sm-12 col-md-12 col-lg-12">
-      <div className="col-sm-12 col-md-12 col-lg-12">
-        <Campus id={id} />
-      </div>
-
+      <Campus id={id} />
       <StudentList campusId={id} />
     </div>
   )

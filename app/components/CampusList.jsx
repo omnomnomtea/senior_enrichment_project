@@ -32,6 +32,4 @@ const mapDispatch = () => {
 };
 
 const BetterCampusLIst = connect(mapState, mapDispatch)(CampusList);
-
-
 export default BetterCampusLIst;

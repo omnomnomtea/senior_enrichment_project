@@ -6,8 +6,8 @@ const Promise = require('bluebird');
 
 var data = {
   campus: [
-    { name: 'Mars', image: 'https://mars.nasa.gov/images/mars-globe-valles-marineris-enhanced.jpg' },
-    { name: 'Jupiter', image: 'https://solarsystem.nasa.gov/images/planets/galpic_jupiter.png' },
+    { name: 'Tatooine', image: 'https://vignette2.wikia.nocookie.net/starwars/images/8/82/Tatooine-TOR.jpg' },
+    { name: 'Alderaan', image: 'https://vignette1.wikia.nocookie.net/starwars/images/4/4a/Alderaan.jpg' },
     { name: 'Death Star', image: 'https://upload.wikimedia.org/wikipedia/en/f/f9/Death_star1.png' },
 
   ],

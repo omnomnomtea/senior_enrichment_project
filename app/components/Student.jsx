@@ -26,11 +26,10 @@ class Student extends Component {
             {this.props.student.firstName + ' ' + this.props.student.lastName}
           </Link>
 
-
           <button className='btn btn-danger pull-right' onClick={this.handleDeleteClick}>x</button>
 
           <Link to={`/editstudent/${this.props.id}`}>
-          <button className='btn btn-warning pull-right'><span className="glyphicon glyphicon-pencil" /></button>
+            <button className='btn btn-warning pull-right'><span className="glyphicon glyphicon-pencil" /></button>
           </Link>
         </div>
 
