@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { createStudent, modifyStudent, deleteStudent } from '../reducers/studentReducer'
 import { Link } from 'react-router-dom';
 
-
 class Student extends Component {
 
   constructor() {
@@ -13,6 +12,7 @@ class Student extends Component {
   }
 
   render() {
+    //if the students haven't loaded yet, don't try to render them
     if (!this.props.student) return <div />
 
     const campusId = this.props.student.campusId;
@@ -42,7 +42,7 @@ class Student extends Component {
     )
   }
 
-  handleDeleteClick(event) {
+  handleDeleteClick() {
     this.props.deleteStudent(this.props.student)
   }
 

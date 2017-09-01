@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { modifyCampus, createCampus } from '../reducers/campusReducer'
 import { connect } from 'react-redux';
 
-
 class CampusForm extends Component {
   constructor(props) {
     super(props);
