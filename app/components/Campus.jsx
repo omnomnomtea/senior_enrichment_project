@@ -16,6 +16,9 @@ class Campus extends Component {
     // to load the campuses finishes. We need to render an empty component
     // to prevent errors in this case, which we check for by seeing if the
     // campus prop is defined
+
+    // Could we resolve this issue by having the campus be an empty object by default?
+    // Perhaps we handle this logic in mapStateToProps?
     if (!this.props.campus) {
       return (<div />)
     }
@@ -45,7 +48,7 @@ class Campus extends Component {
 
 const mapState = (state, ownProps) => {
   return {
-    history: ownProps.history,
+    history: ownProps.history, // WHy do we pass this as a prop down? What are the ramifications for how this affects shouldComponentUpdate? Do we now ever re-render unnecessarily?
     campus: state.campuses.find(campus => campus.id === ownProps.id),
     id: ownProps.id
   }
@@ -55,7 +58,7 @@ const mapState = (state, ownProps) => {
 const mapDispatch = (dispatch) => {
   return {
     deleteCampus: (campus) => { dispatch(deleteCampus(campus)) },
-    createCampus: (campus) => { dispatch(createCampus(campus)) },
+    createCampus: (campus) => { dispatch(createCampus(campus)) },  //createCampus is not defined
     modifyCampus: (campus) => { dispatch(modifyCampus(campus)) },
   }
 }

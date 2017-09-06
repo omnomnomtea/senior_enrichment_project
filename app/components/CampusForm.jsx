@@ -38,6 +38,9 @@ class CampusForm extends Component {
   }
 
   render() {
+
+    //just check if the campus is defined. once again, could we juse make the campus an
+    // empty object instead of returning an empty div?
     if (this.props.campuses.length <= 0) {
       return (<div />);
     }
@@ -63,6 +66,13 @@ class CampusForm extends Component {
     )
   }
 
+  // You can handle both onUpdates in one function if you like.
+  // You would need to modify your state a little bit, but this is the gist
+  onUpdate(e) {
+    this.setState({ [e.target.name]: e.target.value, dirty: true });
+  }
+
+
   onUpdateName(event) {
     this.setState({ name: event.target.value, nameDirty: true });
   }
@@ -80,6 +90,8 @@ class CampusForm extends Component {
       if (this.state.name) campus.name = this.state.name;
       if (this.state.image) campus.image = this.state.image;
 
+      //This logic is messy. Why not use separate components for adding and editing?
+      //Could we just factor out the common functionality into a single component?
       if (!this.props.id) { //if we're creating a new campus
         this.props.createCampus(campus);
       }
@@ -103,7 +115,7 @@ const mapState = (state, ownProps) => {
   return {
     id: id,
     history: ownProps.history,
-    campuses: state.campuses,
+    campuses: state.campuses,  //Our form does not need this state
     campus: state.campuses.find(campus => campus.id === id)
   }
 };
