@@ -42,7 +42,7 @@ router.delete('/:campusId', (req, res, next) => {
       return campus.destroy();
     })
     .then( () => {
-      res.sendStatus(200);
+      res.sendStatus(200); //maybe send a 204 to be more specific
     })
     .catch(next);
 })
